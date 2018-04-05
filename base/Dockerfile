@@ -1,6 +1,9 @@
 FROM ubuntu 
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 
+ENV http_proxy "http://10.100.33.50:8080"
+ENV https_proxy "https://10.100.33.50:8080"
+
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends openjdk-8-jdk
@@ -44,7 +47,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 
 RUN gpg --keyserver pool.sks-keyservers.net --recv-key C36C5F0F
 
-ENV HADOOP_VERSION 2.7.1
+ENV HADOOP_VERSION 2.7.5
 ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN set -x \
     && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
