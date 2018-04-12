@@ -4,23 +4,16 @@ MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
 ENV http_proxy "http://hzha:Th0ughtW0rkerk@caa-proxybr.co.i.caa.ca:8080"
 ENV https_proxy "https://hzha:Th0ughtW0rkerk@caa-proxybr.co.i.caa.ca:8080"
 
-RUN gpg --keyserver pgp.mit.edu --recv-keys \
-        7638D0442B90D010 8B48AD6246925553
-RUN gpg --armor --export 7638D0442B90D010 | apt-key add -
-
-RUN gpg --armor --export 8B48AD6246925553 | apt-key add - 
-
 RUN echo 'Acquire::http::No-Cache true;' > /etc/apt/apt.conf
 
 RUN echo 'Acquire::http::Pipeline-Depth 0;' >> /etc/apt/apt.conf
 
 RUN apt-get update && apt-get install -y curl wget 
 
-RUN apt-get install -y vim --fix-missing
 
-RUN curl -s http://apache.mirror.colo-serv.net/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz | tar -xz -C /usr/local/  
+RUN curl -s http://apache.mirror.colo-serv.net/spark/spark-1.6.3/spark-1.6.3-bin-hadoop2.6.tgz | tar -xz -C /usr/local/  
 
-RUN cd /usr/local && ln -s spark-2.3.0-bin-hadoop2.7 spark
+RUN cd /usr/local && ln -s spark-1.6.3-bin-hadoop2.6 spark
 
 ENV SPARK_HOME /usr/local/spark
 ENV HADOOP_HOME /opt/hadoop-2.7.5
