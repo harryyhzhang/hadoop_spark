@@ -23,9 +23,9 @@ RUN cp $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defa
 
 RUN echo spark.yarn.jars hdfs:///spark/*.jar > $SPARK_HOME/conf/spark-defaults.conf
 
-RUN wget http://repo1.maven.org/maven2/com/sun/jersey/jersey-bundle/1.19.1/jersey-bundle-1.19.1.jar -O $SPARK_HOME/jars/jersey-bundle-1.19.1.jar
+RUN wget http://repo1.maven.org/maven2/com/sun/jersey/jersey-bundle/1.19.1/jersey-bundle-1.19.1.jar -O $SPARK_HOME/lib/jersey-bundle-1.19.1.jar
 
-RUN hadoop fs -put $SPARK_HOME/jars /spark
+RUN hadoop fs -put $SPARK_HOME/lib /spark
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
@@ -57,7 +57,7 @@ ENV PATH $HIVE_HOME/bin:$PATH
 
 RUN wget http://stat-computing.org/dataexpo/2009/2008.csv.bz2 	 -O flights.csv.bz2 && bunzip2 flights.csv.bz2
 
-RUN apt-get update && apt-get install -y openjdk-8-jdk && apt-get install -y libxml2-dev
+RUN apt-get update && apt-get install -y openjdk-8-jdk && apt-get install -y libxml2-dev && apt-get install -y libcurl4-openssl-dev libssl-dev
 
 CMD echo 'Sys.setenv(https_proxy = "10.100.33.50:8080");\n\
 Sys.setenv(https_proxy_user= "hzha:Th0ughtW0rkerk");\n\
