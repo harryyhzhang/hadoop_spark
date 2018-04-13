@@ -16,7 +16,7 @@ RUN curl -s http://apache.mirror.colo-serv.net/spark/spark-1.6.3/spark-1.6.3-bin
 RUN cd /usr/local && ln -s spark-1.6.3-bin-hadoop2.6 spark
 
 ENV SPARK_HOME /usr/local/spark
-ENV HADOOP_HOME /opt/hadoop-2.7.5
+ENV HADOOP_HOME /opt/hadoop-2.6.5
 ENV PATH $PATH:$SPARK_HOME/bin:$HADOOP_HOME/bin
 
 RUN cp $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defaults.conf
